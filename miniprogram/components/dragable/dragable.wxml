@@ -1,0 +1,17 @@
+<!--components/dragable/dragable.wxml-->
+<view 
+  class="dragable" 
+  bindtouchstart="onTouchStart"
+  bindtouchmove="onTouchMove"
+  bindtouchend="onTouchEnd"
+  style="left: {{left}}px; top: {{top}}px; width: {{width}}px; height: {{height}}px"
+>
+  <view class="dot top-left" data-control="top, left, width, height"></view>
+  <view class="dot top" data-control="top, height"></view>
+  <view class="dot top-right" data-control="top, width, height"></view>
+  <view class="dot bottom-left" data-control="left, width, height"></view>
+  <view class="dot bottom" data-control="height"></view>
+  <view class="dot bottom-right" data-control="width, height"></view>
+  <view class="dot left" data-control="left, width"></view>
+  <view class="dot right" data-control="width"></view>
+</view>

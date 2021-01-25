@@ -1,0 +1,15 @@
+/* components/grid/grid.wxss */
+.grid {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(90deg, var(--grid-line-color) 1px, rgba(0, 0, 0, 0) 1px),
+                    linear-gradient(var(--grid-line-color) 1px, rgba(0, 0, 0, 0) 1px); 
+  z-index: 0;
+}
+.col {
+  position: fixed;
+  height: 100vh;
+  background-color: var(--grid-color);
+  z-index: 0;
+}

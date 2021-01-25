@@ -1,0 +1,6 @@
+<!--miniprogram/pages/demo/index.wxml-->
+<view class="main">
+  <dragable left="10" top="10" width="100" height="100" binddragging="onDragging"></dragable>
+  <grid span="{{grid.span}}" gutter="{{grid.gutter}}" width="{{grid.width}}"/>
+  <guide></guide>
+</view>

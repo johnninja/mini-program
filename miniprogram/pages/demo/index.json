@@ -1,0 +1,8 @@
+{
+  "disableScroll": true,
+  "usingComponents": {
+    "dragable": "/components/dragable/dragable",
+    "grid": "/components/grid/grid",
+    "guide": "/components/guide/guide"
+  }
+}

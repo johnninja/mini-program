@@ -1,0 +1,15 @@
+/* miniprogram/pages/demo/index.wxss */
+page {
+  --primary-color: blue;
+  --drag-color: green;
+  --dot-width: 20px;
+  --grid-color: rgba(101, 196, 252, 0.35);
+  --gird-line-color: #cccccc;
+  --guide-line-color: red;
+}
+.main {
+  position: relative;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}

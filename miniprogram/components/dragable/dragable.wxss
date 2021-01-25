@@ -1,0 +1,55 @@
+/* components/dragable/dragable.wxss */
+.dragable {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  box-shadow: 0 0 0 1px var(--drag-color);
+  z-index: 9999;
+}
+.dot {
+  position: absolute;
+  width: var(--dot-width);
+  height: var(--dot-width);
+}
+.dot::after {
+  content: '';
+  display: block;
+  margin-top: calc(var(--dot-width) / 4);
+  margin-left: calc(var(--dot-width) / 4);
+  width: calc(var(--dot-width) / 2);
+  height: calc(var(--dot-width) / 2);
+  background-color: var(--drag-color);
+  border-radius: 50%;
+}
+.top-left {
+  top: calc(0% - var(--dot-width) / 2);
+  left: calc(0% - var(--dot-width) / 2);
+}
+.top {
+  top: calc(0% - var(--dot-width) / 2);
+  left: calc(50% - var(--dot-width) / 2);
+}
+.top-right {
+  top: calc(0% - var(--dot-width) / 2);
+  left: calc(100% - var(--dot-width) / 2);
+}
+.bottom-left {
+  top: calc(100% - var(--dot-width) / 2);
+  left: calc(0% - var(--dot-width) / 2);
+}
+.bottom {
+  top: calc(100% - var(--dot-width) / 2);
+  left: calc(50% - var(--dot-width) / 2);
+}
+.bottom-right {
+  top: calc(100% - var(--dot-width) / 2);
+  left: calc(100% - var(--dot-width) / 2);
+}
+.left {
+  left: calc(0% - var(--dot-width) / 2);
+  top: calc(50% - var(--dot-width) / 2);
+}
+.right {
+  left: calc(100% - var(--dot-width) / 2);
+  top: calc(50% - var(--dot-width) / 2);
+}

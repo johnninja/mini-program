@@ -1,0 +1,4 @@
+<!--components/grid/grid.wxml-->
+<view class="grid" style="background-size: {{width}}px {{width}}px">
+  <view class="col" wx:for="{{columns}}" wx:for-index="index" wx:for-item="item" wx:key="index" style="left: {{item.left}}px; width: {{item.width}}px;"></view>
+</view>

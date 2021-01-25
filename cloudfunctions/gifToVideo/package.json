@@ -1,0 +1,18 @@
+{
+  "name": "gitToVideo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "shell": "ls",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.20",
+    "fluent-ffmpeg": "^2.1.2",
+    "fluent-ffmpeg-multistream": "^1.0.0",
+    "wx-server-sdk": "latest"
+  }
+}

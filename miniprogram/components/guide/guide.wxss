@@ -1,0 +1,29 @@
+/* components/guide/guide.wxss */
+.guide {
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  width: 100px;
+  height: 100px;
+}
+.guide .line {
+  position: fixed;
+  border-style: dashed;
+  border-color: var(--guide-line-color);
+}
+.line.top,
+.line.bottom {
+  left: 0;
+  width: 100vw;
+  height: 0;
+  border-top-width: 1px;
+  border-bottom-width: 0;
+}
+.line.left,
+.line.right {
+  top: 0;
+  width: 0;
+  height: 100vh;
+  border-left-width: 1px;
+  border-right-width: 0;
+}
