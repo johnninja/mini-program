@@ -1,6 +1,25 @@
 <!--miniprogram/pages/demo/index.wxml-->
 <view class="main">
-  <dragable left="10" top="10" width="100" height="100" binddragging="onDragging"></dragable>
-  <grid span="{{grid.span}}" gutter="{{grid.gutter}}" width="{{grid.width}}"/>
-  <guide></guide>
+  <dragable 
+    left="{{drag.left}}" 
+    top="{{drag.top}}" 
+    width="{{drag.width}}" 
+    height="{{drag.height}}" 
+    binddragging="onDragging"
+  />
+  <grid 
+    span="{{grid.span}}" 
+    gutter="{{grid.gutter}}" 
+    width="{{grid.width}}" 
+    padding="{{grid.padding}}"
+    bindloaded="onGridLoaded"
+  />
+  <guide
+    left="{{guide.left}}"
+    right="{{guide.right}}"
+    top="{{guide.top}}"
+    bottom="{{guide.bottom}}"
+    center="{{guide.center}}"
+    middle="{{guide.middle}}"
+  />
 </view>

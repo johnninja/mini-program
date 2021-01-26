@@ -12,7 +12,8 @@
   border-color: var(--guide-line-color);
 }
 .line.top,
-.line.bottom {
+.line.bottom,
+.line.middle {
   left: 0;
   width: 100vw;
   height: 0;
@@ -20,10 +21,15 @@
   border-bottom-width: 0;
 }
 .line.left,
-.line.right {
+.line.right,
+.line.center {
   top: 0;
   width: 0;
   height: 100vh;
   border-left-width: 1px;
   border-right-width: 0;
+}
+.line.middle,
+.line.center {
+  border-style: solid;
 }

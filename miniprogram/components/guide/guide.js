@@ -19,6 +19,14 @@ Component({
     bottom: {
       type: Number,
       value: 0
+    },
+    center: {
+      type: Number,
+      value: 0
+    },
+    middle: {
+      type: Number,
+      value: 0
     }
   },
 
@@ -33,6 +41,6 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    
+
   }
 })

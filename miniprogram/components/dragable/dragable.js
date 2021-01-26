@@ -1,4 +1,5 @@
 // components/dragable/dragable.js
+let timer = null
 Component({
   /**
    * 组件的属性列表
@@ -35,6 +36,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    debounce(fn, time) {
+      if (timer) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(fn.bind(this), time)
+    },
     onTouchStart (e) {
       const touch = e.touches[0]
       const { clientX, clientY } = touch
@@ -50,11 +57,14 @@ Component({
       const touch = e.changedTouches[0]
       const { clientX, clientY } = touch
       const { startX, startY, left, top, width, height, control } = this.data
-      const deltaX = clientX - startX
-      const deltaY = clientY - startY
+      let deltaX = clientX - startX
+      let deltaY = clientY - startY
       let targetObj = {}
       let widthNegtive = control && control.includes('left')
       let heightNegtive = control && control.includes('top')
+
+      deltaX = deltaX > 0 ? Math.ceil(deltaX) : Math.floor(deltaX)
+      deltaY = deltaY > 0 ? Math.ceil(deltaY) : Math.floor(deltaY)
 
       const temp = {
         left: left + deltaX,
@@ -82,13 +92,20 @@ Component({
         startY: clientY,
         ...targetObj
       })
-
-      this.triggerEvent('dragging', {
-        left, top, width, height,
-        ...targetObj
+      wx.nextTick(() => {
+        this.triggerEvent('dragging', {
+          left, top, width, height,
+          ...targetObj
+        })
       })
     },
-    onTouchEnd () {}
+    onTouchEnd () {
+      this.setData({
+        startX: 0,
+        startY: 0,
+        control: null
+      })
+    }
   },
   attached () {
     

@@ -13,6 +13,10 @@ Component({
       type: Number,
       value: 0
     },
+    padding: {
+      type: Number,
+      value: 0
+    },
     width: {
       type: Number,
       value: 0
@@ -32,12 +36,13 @@ Component({
    */
   methods: {
     caculate (width) {
-      const { span, gutter } = this.data
+      const { span, gutter, padding } = this.data
       let arr = []
-      let w = (width - (gutter * (span + 1))) / span
+      let w = (width - padding * 2 - gutter * (span - 1)) / span
+
       for (let i = 0; i < span; i++) {
         let temp = {
-          left: (w * i) + (gutter * (i + 1)),
+          left: i * (w + gutter) + padding,
           width: w
         }
         arr.push(temp)
@@ -52,5 +57,6 @@ Component({
     const columns = this.caculate(width)
 
     this.setData({ columns })
+    this.triggerEvent('loaded', columns)
   }
 })
