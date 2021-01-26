@@ -8,7 +8,7 @@
 }
 .guide .line {
   position: fixed;
-  border-style: dashed;
+  border-style: solid;
   border-color: var(--guide-line-color);
 }
 .line.top,
@@ -17,7 +17,7 @@
   left: 0;
   width: 100vw;
   height: 0;
-  border-top-width: 1px;
+  border-top-width: 2px;
   border-bottom-width: 0;
 }
 .line.left,
@@ -26,7 +26,7 @@
   top: 0;
   width: 0;
   height: 100vh;
-  border-left-width: 1px;
+  border-left-width: 2px;
   border-right-width: 0;
 }
 .line.middle,

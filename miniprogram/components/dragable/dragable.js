@@ -1,5 +1,4 @@
 // components/dragable/dragable.js
-let timer = null
 Component({
   /**
    * 组件的属性列表
@@ -20,29 +19,55 @@ Component({
     height: {
       type: Number,
       value: 0
+    },
+    gap: {
+      type: Number,
+      value: 3
+    },
+    leftConnected: {
+      type: Boolean,
+      value: false
+    },
+    topConnected: {
+      type: Boolean,
+      value: false
     }
   },
-
+  observers: {
+    "leftConnected": function(val) {
+      if (this.data.leftConnectedStatus !== val) {
+        wx.vibrateShort()
+        this.setData({
+          leftConnectedStatus: val
+        })
+      }
+    },
+    "topConnected": function(val) {
+      if (this.data.topConnectedStatus !== val) {
+        wx.vibrateShort()
+        this.setData({
+          topConnectedStatus: val
+        })
+      }
+    }
+  },
   /**
    * 组件的初始数据
    */
   data: {
     startX: 0,
     startY: 0,
-    control: null
+    control: null,
+    leftConnectedStatus: false,
+    topConnectedStatus: false
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    debounce(fn, time) {
-      if (timer) {
-        clearTimeout(timer)
-      }
-      timer = setTimeout(fn.bind(this), time)
-    },
     onTouchStart (e) {
+      const { left, top, width, height } = this.data
       const touch = e.touches[0]
       const { clientX, clientY } = touch
       const { control } = e.target.dataset
@@ -52,11 +77,14 @@ Component({
         startY: clientY,
         control: control ? control.split(',').map(item => item.trim()) : null
       })
+      wx.nextTick(() => {
+        this.triggerEvent('dragstart', { left, top, width, height })
+      })
     },
     onTouchMove (e) {
       const touch = e.changedTouches[0]
       const { clientX, clientY } = touch
-      const { startX, startY, left, top, width, height, control } = this.data
+      const { startX, startY, left, top, width, height, control, leftConnected, topConnected, gap } = this.data
       let deltaX = clientX - startX
       let deltaY = clientY - startY
       let targetObj = {}
@@ -65,6 +93,13 @@ Component({
 
       deltaX = deltaX > 0 ? Math.ceil(deltaX) : Math.floor(deltaX)
       deltaY = deltaY > 0 ? Math.ceil(deltaY) : Math.floor(deltaY)
+
+      if (leftConnected && Math.abs(deltaX) < gap) {
+        deltaX = 0
+      }
+      if (topConnected && Math.abs(deltaY) < gap) {
+        deltaY = 0
+      }
 
       const temp = {
         left: left + deltaX,
@@ -95,7 +130,8 @@ Component({
       wx.nextTick(() => {
         this.triggerEvent('dragging', {
           left, top, width, height,
-          ...targetObj
+          ...targetObj,
+          resize: !!control
         })
       })
     },
@@ -104,6 +140,9 @@ Component({
         startX: 0,
         startY: 0,
         control: null
+      })
+      wx.nextTick(() => {
+        this.triggerEvent('dragend')
       })
     }
   },

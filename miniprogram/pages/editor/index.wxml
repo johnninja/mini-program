@@ -5,7 +5,12 @@
     top="{{drag.top}}" 
     width="{{drag.width}}" 
     height="{{drag.height}}" 
+    gap="{{drag.gap}}" 
+    leftConnected="{{drag.leftConnected}}"
+    topConnected="{{drag.topConnected}}"
     binddragging="onDragging"
+    binddragstart="onDragStart"
+    binddragend="onDragEnd"
   />
   <grid 
     span="{{grid.span}}" 
@@ -15,6 +20,7 @@
     bindloaded="onGridLoaded"
   />
   <guide
+    wx:if="{{showGuide}}"
     left="{{guide.left}}"
     right="{{guide.right}}"
     top="{{guide.top}}"

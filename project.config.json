@@ -35,7 +35,7 @@
     "useApiHostProcess": false
   },
   "appid": "wx1b554cf516f00f0e",
-  "projectname": "gif2video",
+  "projectname": "frame",
   "libVersion": "2.14.0",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},

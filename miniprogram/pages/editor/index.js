@@ -18,13 +18,16 @@ Page({
       left: 0,
       top: 0,
       width: 200,
-      height: 150
+      height: 150,
+      gap: 2,
+      leftConnected: false,
+      rightConnected: false
     },
     grid: {
-      width: 10,
+      width: 20,
       span: 4,
       gutter: 20,
-      padding: 40
+      padding: 20
     },
     guide: {
       left: 0,
@@ -35,7 +38,8 @@ Page({
       middle: 0
     },
     grids: [],
-    elements: []
+    elements: [],
+    showGuide: false
   },
 
   /**
@@ -47,6 +51,7 @@ Page({
     const height = app.globalData.winHeight
     this.setData({
       page: {
+        ...this.data.page,
         width,
         height
       },
@@ -60,28 +65,39 @@ Page({
 
   onDragging (e) {
     const data = e.detail
+    this.setGuideLine(data)
+  },
+  onDragStart (e) {
+    const data = e.detail
+    this.setData({showGuide: true})
+    this.setGuideLine(data)
+  },
+  onDragEnd () {
+    this.setData({
+      showGuide: false,
+      guide: {
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0,
+        center: 0,
+        middle: 0
+      }
+    })
+  },
+  setGuideLine (data) {
     const { collision, drag } = this.collisionDetect(data)
 
     this.setData({
       drag: {
+        ...this.data.drag,
         ...data,
-        ...drag
+        ...drag,
+        leftConnected: drag.leftConnected || false,
+        topConnected: drag.topConnected || false
       },
       guide: {
         ...collision
-      }
-    })
-
-    wx.nextTick(() => {
-      if (
-        collision.left !== 0 ||
-        collision.right !== 0 ||
-        collision.top !== 0 ||
-        collision.bottom !== 0 ||
-        collision.center !== 0 ||
-        collision.middle !== 0
-      ) {
-        wx.vibrateShort()
       }
     })
   },
@@ -95,7 +111,6 @@ Page({
     const distance = this.distance
     const { elements, grids, page } = this.data
     let mixEles = [...elements, ...grids, page]
-
     let collision = {
       left: 0,
       top: 0,
@@ -117,58 +132,62 @@ Page({
       // left
       if (distance(left, col.left)) {
         drag.left = collision.left = col.left
+        drag.leftConnected = true
       }
       if (distance(left, col.left + col.width)) {
         drag.left = collision.left = col.left + col.width
+        drag.leftConnected = true
       }
       // top
       if (distance(top, col.top)) {
         drag.top = collision.top = col.top
+        drag.topConnected = true
       }
       if (distance(top, col.top + col.height)) {
         drag.top = collision.top = col.top + col.height
+        drag.topConnected = true
       }
 
       // right
       if (distance(right, (col.left + col.width))) {
         collision.right = col.left + col.width
         drag.width = collision.right - left
+        drag.leftConnected = true
       }
       if (distance(right, col.left)) {
         collision.right = col.left
         drag.width = collision.right - left
+        drag.leftConnected = true
       }
       // bottom
       if (distance(bottom, (col.top + col.height))) {
         collision.bottom = col.top + col.height
         drag.height = collision.bottom - top
+        drag.topConnected = true
       }
       if (distance(bottom, col.top)) {
         collision.bottom = col.top
         drag.height = collision.bottom - top
+        drag.topConnected = true
       }
 
       // center
-      if (distance(center, col.left + col.width / 2)) {
+      if (!source.resize && distance(center, col.left + col.width / 2)) {
         collision.center = col.left + col.width / 2
         drag.left = collision.center - source.width / 2
+        drag.leftConnected = true
       }
       // middle
-      if (distance(middle, col.top + col.height / 2)) {
+      if (!source.resize && distance(middle, col.top + col.height / 2)) {
         collision.middle = col.top + col.height / 2
         drag.top = collision.middle - source.height / 2
+        drag.topConnected = true
       }
     })
 
     return { collision, drag }
   },
   distance(a, b) {
-    return Math.abs(a - b) < 3
-  },
-  debounce(fn, time) {
-    if (timer) {
-      clearTimeout(timer)
-    }
-    timer = setTimeout(fn.bind(this), time)
+    return Math.abs(a - b) < this.data.drag.gap
   }
 })

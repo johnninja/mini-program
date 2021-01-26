@@ -1,6 +1,5 @@
 <!--components/guide/guide.wxml-->
 <view class="guide">
-  <text>{{left}}</text>
   <view class="line top" style="top: {{top}}px" wx:if="{{top !== 0}}"></view>
   <view class="line right" style="left: {{right}}px" wx:if="{{right !== 0}}"></view>
   <view class="line bottom" style="top: {{bottom}}px;" wx:if="{{bottom !== 0}}"></view>

@@ -1,10 +1,13 @@
 /* components/dragable/dragable.wxss */
+.drag-view {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+}
 .dragable {
   position: absolute;
-  width: 100px;
-  height: 100px;
   box-shadow: 0 0 0 1px var(--drag-color);
-  z-index: 9999;
 }
 .dot {
   position: absolute;
