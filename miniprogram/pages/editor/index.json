@@ -3,6 +3,7 @@
   "usingComponents": {
     "dragable": "/components/dragable/dragable",
     "grid": "/components/grid/grid",
-    "guide": "/components/guide/guide"
+    "guide": "/components/guide/guide",
+    "icon": "/components/icon/icon"
   }
 }

@@ -1,0 +1,15 @@
+/* components/icon/icon.wxss */
+@import '../../style/icon.wxss';
+
+.icons {
+  display: flex;
+  flex-wrap: wrap;
+}
+.icon {
+  width: 20%;
+  font-size: 20px;
+  text-align: center;
+}
+.icon-name {
+  font-size: 14px;
+}

@@ -1,0 +1,7 @@
+<!--components/icon/icon.wxml-->
+<view class="icons">
+  <view class="icon" wx:for="{{icons}}" wx:for-item="icon" wx:key="name">
+    <view class="cuIcon-{{icon.name}}"></view>
+    <view class="icon-name">{{icon.name}}</view>
+  </view>
+</view>
