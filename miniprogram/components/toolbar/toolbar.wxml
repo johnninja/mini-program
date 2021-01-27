@@ -1,0 +1,18 @@
+<!--components/toolbar/toolbar.wxml-->
+<view class="toolbar">
+  <view class="toolbar-content">
+    <view class="detail">
+      <view class="group">
+        <view class="label">left: {{message.left}}</view>
+        <view class="label">top: {{message.top}}</view>
+      </view>
+      <view class="group">
+        <view class="label">width: {{message.width}}</view>
+        <view class="label">height: {{message.height}}</view>
+      </view>
+    </view>
+    <view class="finish">
+      <view class="cuIcon-check" bindtap="handleFinish"></view>
+    </view>
+  </view>
+</view>

@@ -4,6 +4,8 @@
     "dragable": "/components/dragable/dragable",
     "grid": "/components/grid/grid",
     "guide": "/components/guide/guide",
-    "icon": "/components/icon/icon"
+    "icon": "/components/icon/icon",
+    "contextmenu": "/components/contextmenu/contextmenu",
+    "toolbar": "/components/toolbar/toolbar"
   }
 }

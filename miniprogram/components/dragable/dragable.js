@@ -100,7 +100,7 @@ Component({
       deltaX = deltaX > 0 ? Math.ceil(deltaX) : Math.floor(deltaX)
       deltaY = deltaY > 0 ? Math.ceil(deltaY) : Math.floor(deltaY)
 
-      const temp = {
+      let temp = {
         left: left + (leftConnected && Math.abs(deltaX) < gap ? 0 : deltaX),
         top: top + (topConnected && Math.abs(deltaY) < gap ? 0 : deltaY),
         width: widthNegtive ? width - deltaX : width + deltaX,
@@ -126,17 +126,20 @@ Component({
         ...targetObj,
         resize: !!control
       })
-
+      const updatedDrag = {
+        left, top, width, height,
+        ...targetObj,
+        ...drag
+      }
       this.setData({
         startX: clientX,
         startY: clientY,
         guide: collision,
-        left, top, width, height,
-        ...targetObj,
-        ...drag
+        ...updatedDrag
       })
       wx.nextTick(() => {
         this.triggerEvent('dragging', {
+          drag: updatedDrag,
           guide: collision
         })
       })

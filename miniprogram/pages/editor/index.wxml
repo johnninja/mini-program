@@ -1,30 +1,45 @@
 <!--miniprogram/pages/demo/index.wxml-->
-<view class="main">
-  <dragable 
-    left="{{drag.left}}" 
-    top="{{drag.top}}" 
-    width="{{drag.width}}" 
-    height="{{drag.height}}" 
-    gap="{{drag.gap}}" 
-    rects="{{grids}}"
-    binddragging="onDragging"
-    binddragstart="onDragStart"
-    binddragend="onDragEnd"
-  />
-  <grid 
-    span="{{grid.span}}" 
-    gutter="{{grid.gutter}}" 
-    width="{{grid.width}}" 
-    padding="{{grid.padding}}"
-    bindloaded="onGridLoaded"
-  />
-  <guide
-    wx:if="{{showGuide}}"
-    left="{{guide.left}}"
-    right="{{guide.right}}"
-    top="{{guide.top}}"
-    bottom="{{guide.bottom}}"
-    center="{{guide.center}}"
-    middle="{{guide.middle}}"
-  />
+<view class="main" bindlongpress="handleLongPress">
+  <view wx:if="{{!mode}}"></view>
+  <view wx:else>
+    <dragable 
+      left="{{drag.left}}" 
+      top="{{drag.top}}" 
+      width="{{drag.width}}" 
+      height="{{drag.height}}" 
+      gap="{{drag.gap}}" 
+      rects="{{grids}}"
+      binddragging="onDragging"
+      binddragstart="onDragStart"
+      binddragend="onDragEnd"
+    />
+    <guide
+      wx:if="{{showGuide}}"
+      left="{{guide.left}}"
+      right="{{guide.right}}"
+      top="{{guide.top}}"
+      bottom="{{guide.bottom}}"
+      center="{{guide.center}}"
+      middle="{{guide.middle}}"
+    />
+    <toolbar message="{{elements[editingIndex]}}" bindfinished="onEditFinished"></toolbar>
+  </view>
+  <view class="container">
+    <grid 
+      span="{{grid.span}}" 
+      gutter="{{grid.gutter}}" 
+      width="{{grid.width}}" 
+      padding="{{grid.padding}}"
+      bindloaded="onGridLoaded"
+    />
+    <view 
+      wx:for="{{elements}}" 
+      wx:for-index="index" 
+      wx:for-item="item" 
+      wx:key="index"
+      data-index="{{index}}"
+      style="position: absolute; top: {{item.top}}px; left: {{item.left}}px; width: {{item.width}}px; height: {{item.height}}px;background: red;z-index: {{1000 + index}};"
+    >
+    </view>
+  </view>
 </view>

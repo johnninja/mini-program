@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    mode: null,
     page: {
       left: 0,
       top: 0,
@@ -17,12 +18,12 @@ Page({
       top: 0,
       width: 200,
       height: 150,
-      gap: 2,
+      gap: 0,
       rects: []
     },
     grid: {
-      width: 0,
-      span: 0,
+      width: 20,
+      span: 5,
       gutter: 20,
       padding: 20
     },
@@ -36,6 +37,7 @@ Page({
     },
     grids: [],
     elements: [],
+    editingIndex: 0,
     showGuide: false
   },
   /**
@@ -64,10 +66,59 @@ Page({
       }
     })
   },
+  handleLongPress (e) {
+    const { drag, elements, grids, page, mode } = this.data
+    const dataset = e.target.dataset
+    const that = this
 
-  onDragging (e) {
-    const { guide } = e.detail
+    if (mode === 'edit') {
+      return
+    }
+
+    if (dataset && dataset.index >= 0) {
+      this.setData({
+        mode: 'edit',
+        drag: {
+          ...drag,
+          ...elements[dataset.index]
+        },
+        editingIndex: dataset.index
+      })
+      return
+    }
+
+    wx.showActionSheet({
+      itemList: ['添加元素', '页面属性'],
+      success (res) {
+        const index = res.tapIndex
+        const data = that.genRect()
+        const newElements = [...elements, data]
+
+        that.setData({
+          mode: 'edit',
+          drag: {
+            ...drag,
+            ...data,
+            rects: [...newElements, ...grids, page]
+          },
+          elements: newElements,
+          editingIndex: elements.length
+        })
+      }
+    })
+  },
+  onEditFinished () {
     this.setData({
+      mode: null
+    })
+  },
+  onDragging (e) {
+    const { guide, drag } = e.detail
+    const { editingIndex } = this.data
+
+    const key = `elements[${editingIndex}]`
+    this.setData({
+      [key]: drag,
       guide
     })
   },
@@ -102,5 +153,18 @@ Page({
         page
       ]
     })
+  },
+  genRect () {
+    const winWidth = app.globalData.winWidth
+    const winHeight = app.globalData.winHeight
+    const width = 100
+    const height = 100
+
+    return {
+      left: (winWidth - width) / 2,
+      top: (winHeight - height) / 2,
+      width,
+      height
+    }
   }
 })

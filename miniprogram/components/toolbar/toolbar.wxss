@@ -1,0 +1,36 @@
+/* components/toolbar/toolbar.wxss */
+@import '../../style/icon.wxss';
+.toolbar {
+  position: fixed;
+  left: 0;
+  top: 10px;
+  padding: 0 20px;
+  width: 100vw;
+  box-sizing: border-box;
+  z-index: 10000;
+}
+.toolbar-content {
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: white;
+  background-color: rosybrown;
+  border-radius: 5px;
+}
+.detail {
+  flex: 1;
+}
+.group {
+  display: flex;
+}
+.label {
+  width: 80px;
+}
+.finish {
+  flex: 1;
+  font-size: 20px;
+  font-weight: bolder;
+  text-align: right;
+}

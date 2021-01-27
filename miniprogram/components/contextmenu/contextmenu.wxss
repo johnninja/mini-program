@@ -1,0 +1,18 @@
+/* components/contextmenu/contextmenu.wxss */
+@import '../../style/icon.wxss';
+.contextmenu {
+  display: inline-block;
+  background-color: antiquewhite;
+  border-radius: 5px;
+  box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.20);
+}
+.item {
+  padding: 3px 10px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+.item .label {
+  margin-left: 5px;
+  font-size: 14px;
+}

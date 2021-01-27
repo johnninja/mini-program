@@ -1,5 +1,5 @@
 /**app.wxss**/
-
+@import './style/icon.wxss';
 button {
   background: initial;
 }
@@ -10,12 +10,4 @@ button:focus{
 
 button::after{
   border: none;
-}
-
-
-page {
-  background: #f6f6f6;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
 }
