@@ -1,5 +1,23 @@
 // miniprogram/pages/demo/index.js
 const app = getApp()
+const schema = {
+  objectID: '',
+  name: '',
+  type: 'group',
+  frame: {
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0
+  },
+  style: {
+    color: {},
+    fills: {},
+    borders: {},
+    shadows: {},
+  },
+  layers: []
+}
 Page({
 
   /**
@@ -7,6 +25,7 @@ Page({
    */
   data: {
     mode: null,
+    editorMode: 'edit',
     page: {
       left: 0,
       top: 0,
@@ -37,6 +56,7 @@ Page({
     },
     grids: [],
     elements: [],
+    groups: [],
     editingIndex: 0,
     showGuide: false
   },
@@ -88,7 +108,7 @@ Page({
     }
 
     wx.showActionSheet({
-      itemList: ['添加元素', '页面属性'],
+      itemList: ['添加元素', '删除元素', '页面属性'],
       success (res) {
         const index = res.tapIndex
         const data = that.genRect()
@@ -154,13 +174,14 @@ Page({
       ]
     })
   },
-  genRect () {
+  genRect (id) {
     const winWidth = app.globalData.winWidth
     const winHeight = app.globalData.winHeight
     const width = 100
     const height = 100
 
     return {
+      id,
       left: (winWidth - width) / 2,
       top: (winHeight - height) / 2,
       width,
