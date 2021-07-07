@@ -1,6 +1,24 @@
 <!--index.wxml-->
 <view class="container">
   <view class="main">
-    
+    <view class="canvas">
+      <canvas id="canvas" type="2d"></canvas>
+    </view>
+    <view class="options">
+      <view class="btn start">start</view>
+      <view class="btn select" bindtap="pickDom">select</view>
+    </view>
+    <view class="controllers">
+      <view class="moves">
+        <view class="button left"></view>
+        <view class="button right"></view>
+        <view class="button top"></view>
+        <view class="button bottom"></view>
+      </view>
+      <view class="fight">
+        <view class="button_a"></view>
+        <view class="button_b"></view>
+      </view>
+    </view>
   </view>
 </view>
