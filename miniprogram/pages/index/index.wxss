@@ -22,6 +22,8 @@
   padding-right: 40rpx;
 }
 .canvas {
+  display: flex;
+  justify-content: center;
   background-color: rgb(175, 175, 175);
   border-radius: 10rpx;
   border-top: 10rpx solid #000;
@@ -29,6 +31,11 @@
   border-left: 5rpx solid #000;
   border-right: 5rpx solid #000;
 }
+/* #canvas {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+} */
 .moves {
   padding: 10rpx;
   position: relative;

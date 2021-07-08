@@ -2,23 +2,24 @@
 <view class="container">
   <view class="main">
     <view class="canvas">
-      <canvas id="canvas" type="2d"></canvas>
+      <canvas id="canvas" type="webgl" style="width: 256px; height: 240px"></canvas>
     </view>
     <view class="options">
-      <view class="btn start">start</view>
-      <view class="btn select" bindtap="pickDom">select</view>
+      <view class="btn start" data-name="BUTTON_START" bindtouchstart="touchStart" bindtouchend="touchEnd">start</view>
+      <view class="btn select" data-name="BUTTON_SELECT" bindtouchstart="touchStart" bindtouchend="touchEnd">select</view>
     </view>
     <view class="controllers">
       <view class="moves">
-        <view class="button left"></view>
-        <view class="button right"></view>
-        <view class="button top"></view>
-        <view class="button bottom"></view>
+        <view class="button left" data-name="BUTTON_LEFT" bindtouchstart="touchStart" bindtouchend="touchEnd"></view>
+        <view class="button right" data-name="BUTTON_RIGHT" bindtouchstart="touchStart" bindtouchend="touchEnd"></view>
+        <view class="button top" data-name="BUTTON_UP" bindtouchstart="touchStart" bindtouchend="touchEnd"></view>
+        <view class="button bottom" data-name="BUTTON_DOWN" bindtouchstart="touchStart" bindtouchend="touchEnd"></view>
       </view>
       <view class="fight">
-        <view class="button_a"></view>
-        <view class="button_b"></view>
+        <view class="button_a" data-name="BUTTON_A" bindtouchstart="touchStart" bindtouchend="touchEnd"></view>
+        <view class="button_b" data-name="BUTTON_B" bindtouchstart="touchStart" bindtouchend="touchEnd"></view>
       </view>
     </view>
+    <button bindtap="pickDom">选择</button>
   </view>
 </view>
